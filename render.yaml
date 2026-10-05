@@ -8,11 +8,15 @@ services:
   - type: web
     name: studybyte-api
     runtime: node
-    rootDir: backend
+    # This is an npm-workspaces monorepo: deps are hoisted to a single
+    # root node_modules/package-lock.json, so `rootDir: backend` breaks
+    # installs (Render would try to `npm install` inside backend/ alone,
+    # which has no lockfile of its own). Install from the repo root and
+    # target the backend workspace explicitly in every command instead.
     plan: free
-    buildCommand: npm install && npm run build
-    startCommand: npm run start
-    preDeployCommand: npm run db:deploy
+    buildCommand: npm install && npm run build --workspace backend
+    startCommand: npm run start --workspace backend
+    preDeployCommand: npm run db:deploy --workspace backend
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
