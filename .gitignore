@@ -1,0 +1,49 @@
+# dependencies
+node_modules/
+**/node_modules/
+
+# build output
+dist/
+build/
+**/dist/
+**/build/
+
+# env files (real secrets) - keep .env.example tracked
+.env
+.env.local
+.env.*.local
+backend/.env
+backend/.env.test
+frontend/.env
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+logs/
+
+# prisma
+backend/prisma/migrations/**/migration_lock.toml.bak
+
+# uploaded files (past papers, study materials) - never tracked, served only
+# via authenticated routes, never via express.static
+backend/uploads/
+backend/uploads-test/
+
+# editor/OS
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# local Claude Code session/tooling state - not part of the app
+.claude/
+
+# testing
+coverage/
+
+# misc
+*.tsbuildinfo
+.cache/
